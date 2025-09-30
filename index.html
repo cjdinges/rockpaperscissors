@@ -44,6 +44,11 @@
             }
 
             function assessWinner(humanChoice, compChoice) {
+                if (humanChoice == compChoice) {
+                    console.log("Human and Computer Tied Round!")
+                    return;
+                }
+
                 let humanWon;
 
                 switch (humanChoice) {
