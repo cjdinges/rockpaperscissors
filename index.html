@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getComputerChoice() {
+            let randRoll = Math.ceil(Math.random() * 3);
+
+            switch (randRoll) {
+                case (1):
+                    return "rock";
+                case (2):
+                    return "paper";
+                case (3):
+                    return "scissors";
+            }
+        }
+
+        function getHumanChoice() {
+            let humanInput = prompt("Please select your move. rock, paper, or scissors.");
+            if (humanInput != null) {
+                let lowerHumanInput = humanInput.toLowerCase();
+                return lowerHumanInput;
+            }
+            else {
+                return humanInput;
+            }
+        }
+
+        function playGame() {
+            let humanScore = 0;
+            let computerScore = 0;
+
+            function playRound() {
+                let humanChoice = getHumanChoice();
+                let compChoice = getComputerChoice();
+                console.log(`Current Round: ${(humanScore + computerScore) + 1}`);
+                console.log(`Human picked ${humanChoice} and computer picked ${compChoice}.`);
+                assessWinner(humanChoice, compChoice);
+            }
+
+            function assessWinner(humanChoice, compChoice) {
+                let humanWon;
+
+                switch (humanChoice) {
+                    case "rock":
+                        compChoice == "scissors" ? humanWon = true : humanWon = false;
+                        break;
+                    case "paper":
+                        compChoice == "rock" ? humanWon = true : humanWon = false;
+                        break;
+                    case "scissors":
+                        compChoice == "scissors" ? humanWon = true : humanWon = false;
+                        break;
+                    case null:
+                        console.log("Human cancelled input");
+                        return;
+                    case "":
+                        console.log("Human input nothing");
+                        return;
+                    default:
+                        console.log("Invalid Input!");
+                        return;
+                }
+
+                if (humanWon) {
+                    humanScore++;
+                    console.log("Human Won Round!")
+                }
+                else {
+                    computerScore++;
+                    console.log("Computer Won Round!")
+                }
+            }
+
+            while((humanScore + computerScore) < 5) {
+                playRound();
+            }
+
+            console.log(`Final Score: Human: ${humanScore} Computer: ${computerScore}`);
+        
+            if (humanScore > computerScore) {
+                console.log("Human Won Game!");
+            }
+            else {
+                console.log("Computer Won Game!");
+            }
+        }
+
+        playGame();
+    </script>
+    
+</body>
+</html>
